@@ -1,0 +1,73 @@
+.main-page {
+  min-height: calc(100vh - 80px); 
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+  padding-top: 30px;
+}
+
+.stars-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -10px;
+  gap: 10px;
+}
+
+.stars-row.single {
+  justify-content: center;
+}
+
+.stars-row.double {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  gap: 250px;
+}
+
+/* Khusus untuk level 3 dan 4 */
+.stars-row.double {
+  transform: translateY(-80px);
+}
+
+/* Khusus untuk level 3*/
+.stars-row.double .star-container:first-child {
+  transform: translateX(-60px);
+}
+
+/* Khusus untuk level 4*/
+.stars-row.double .star-container:last-child {
+  transform: translateX(60px);
+}
+
+/* Khusus untuk level 1 dan 2 */
+.stars-row.bottom-row {
+  transform: translateY(-100px);
+}
+
+.stars-row.bottom-row .star-container:first-child {
+  transform: translateX(-250px); /* Bintang 1 ke kanan */
+}
+
+.stars-row.bottom-row .star-container:last-child {
+  transform: translateX(250px); /* Bintang 2 ke kiri */
+}
+
+.instructions {
+  font-size: 15px;
+  font-style: italic;
+  color: #1A5064;
+  margin-bottom: 10px;
+}
+
+.loading, .error {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.error {
+  color: #e74c3c;
+}

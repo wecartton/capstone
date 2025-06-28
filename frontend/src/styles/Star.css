@@ -1,0 +1,114 @@
+.star-container {
+  display: inline-block;
+  margin-top: -10px;
+  text-align: center;
+}
+
+.star-image {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  width: 200px;
+  height: 180px;
+}
+
+.star-image-file {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+/* Hover effects khusus untuk setiap kondisi bintang */
+.star-image.unlocked:hover {
+  transform: scale(1.03);
+}
+
+.star-image.unlocked:hover .star-image-file {
+  filter: brightness(1.1) drop-shadow(0 0 15px #86A2AD);
+}
+
+.star-image.completed {
+  filter: drop-shadow(0 0 15px #0C465B);
+}
+.star-image.completed:hover {
+  transform: scale(1.03);
+}
+
+.star-image.completed:hover .star-image-file {
+  filter: brightness(1.1) drop-shadow(0 0 10px #0C465B);
+}
+
+.star-image.locked {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.star-image.locked:hover {
+  transform: none;
+}
+
+/* Styling untuk level number */
+.star-level {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  color: #FAF6F1;
+  font-weight: bold;
+  font-size: 36px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Styling khusus untuk setiap kondisi bintang */
+.star-image.unlocked .star-level {
+  color: #FAF6F1;
+}
+
+.star-image.completed .star-level {
+  color: #FAF6F1;
+}
+
+.star-image.locked .star-level {
+  color: #bdc3c7;
+}
+
+.star-label {
+  margin-top: -10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #1A5064;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .star-image {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .star-level {
+    font-size: 24px;
+  }
+  
+  .star-label {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .star-image {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .star-level {
+    font-size: 20px;
+  }
+  
+  .star-label {
+    font-size: 14px;
+  }
+}

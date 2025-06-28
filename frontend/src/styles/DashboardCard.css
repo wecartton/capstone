@@ -1,0 +1,29 @@
+.dashboard-card {
+  flex: 1;
+  min-width: 300px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+.card-content h2 {
+  margin-bottom: 1rem;
+  color: #1e3a5f;
+}
+
+.card-content p {
+  color: #666;
+  margin-bottom: 0;
+}

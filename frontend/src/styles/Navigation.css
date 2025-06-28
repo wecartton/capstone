@@ -1,0 +1,42 @@
+.navbar {
+    background-color: #0C465B;
+    padding: 20px;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-top: -20px;
+  }
+  
+  .navbar-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+  }
+  
+  .navbar-brand h2 {
+    color: #FAF6F1;
+    margin-left: -80px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  /* Responsive design untuk mobile */
+  @media (max-width: 768px) {
+    .navbar-content {
+      flex-direction: column;
+      text-align: center;
+      padding: 0 10px;
+    }
+    
+    .navbar-brand h2 {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+    
+  }
