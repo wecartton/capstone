@@ -5,12 +5,11 @@ from flask_mail import Mail
 from routes.quiz import quiz_bp
 from config import get_config
 from models.user import db
+from models.quiz import QuizLevel, QuizQuestion, QuizAttempt, QuizAnswer, UserQuizProgress  # Import quiz models
 from routes.auth import auth_bp
 from routes.dashboard import dashboard_bp
 from utils.email_service import mail
 from routes.recognition import recognition_bp
-from quiz_data import get_questions_for_level, is_passing_score
-import random
 import os
     
 def create_app():
@@ -43,7 +42,30 @@ def create_app():
     def index():
         return jsonify({'message': 'ELLC API is running', 'status': 'OK'})
 
-    # All quiz-related routes are now handled by quiz_bp
+    @app.route('/api/health')
+    def health_check():
+        """Health check endpoint"""
+        try:
+            # Test database connection
+            db.session.execute('SELECT 1')
+            db_status = "OK"
+        except Exception as e:
+            db_status = f"Error: {str(e)}"
+        
+        # Check quiz data
+        try:
+            level_count = QuizLevel.query.count()
+            question_count = QuizQuestion.query.count()
+            quiz_status = f"OK - {level_count} levels, {question_count} questions"
+        except Exception as e:
+            quiz_status = f"Error: {str(e)}"
+        
+        return jsonify({
+            'status': 'OK',
+            'database': db_status,
+            'quiz_data': quiz_status,
+            'message': 'ELLC API is running'
+        })
     
     # Error handlers
     @app.errorhandler(404)
@@ -78,7 +100,20 @@ def create_app():
 
     # Create database tables
     with app.app_context():
-        db.create_all()
+        try:
+            db.create_all()
+            print("Database tables created successfully")
+            
+            # Check if quiz data exists
+            level_count = QuizLevel.query.count()
+            if level_count == 0:
+                print("WARNING: No quiz levels found in database!")
+                print("Please run 'python migrate_quiz_data.py' to populate quiz data")
+            else:
+                print(f"Found {level_count} quiz levels in database")
+                
+        except Exception as e:
+            print(f"Error creating database tables: {e}")
 
     return app
 

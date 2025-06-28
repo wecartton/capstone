@@ -14,11 +14,14 @@ const QuizPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [timeLeft, setTimeLeft] = useState(null);
+  const [questionProgress, setQuestionProgress] = useState({
+      current: 1,
+      total: 0
+  });
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        // Get JWT token and set up axios config
         const token = localStorage.getItem('accessToken');
         const config = token ? {
           headers: { Authorization: `Bearer ${token}` }
@@ -30,12 +33,19 @@ const QuizPage = () => {
         const response = await axios.get(`/api/quiz/${level}`, config);
         console.log('Quiz response:', response.data);
         
-        setQuestions(response.data.questions);
-        
-        // Initialize timer to 10 minutes (600 seconds) for all levels
-        const totalTime = 10 * 60; // 10 minutes = 600 seconds
+        const { questions: quizQuestions, total_questions } = response.data;
+
+        setQuestions(quizQuestions);
+        setQuestionProgress({
+            current: 1,
+            total: quizQuestions.length // Use actual length from response
+        });
+            
+        const totalTime = quizQuestions.length * 30; // 30 seconds per question
         setTimeLeft(totalTime);
         
+        console.log(`Loaded ${quizQuestions.length} questions for level ${level}`);
+
         setLoading(false);
       } catch (err) {
         console.error('Error fetching quiz:', err);
@@ -82,7 +92,11 @@ const QuizPage = () => {
   };
 
   const handleQuestionClick = (index) => {
-    setCurrentQuestionIndex(index);
+      setCurrentQuestionIndex(index);
+      setQuestionProgress(prev => ({
+          ...prev,
+          current: index + 1
+      }));
   };
 
   const handleSubmit = async () => {
@@ -91,6 +105,8 @@ const QuizPage = () => {
       question_id: parseInt(questionId),
       selected_option: selectedAnswers[questionId]
     }));
+
+    console.log(`Submitting ${formattedAnswers.length} answers out of ${questions.length} questions`);
 
     try {
       // Get JWT token and set up axios config
@@ -213,6 +229,18 @@ const QuizPage = () => {
                 </div>
               </div>
               <div className="timer">{formattedTime}</div>
+            </div>
+
+            <div className="question-progress">
+                <span>Question {questionProgress.current} of {questionProgress.total}</span>
+                <div className="progress-bar">
+                    <div 
+                        className="progress-fill" 
+                        style={{
+                            width: `${(questionProgress.current / questionProgress.total) * 100}%`
+                        }}
+                    />
+                </div>
             </div>
 
             {/* Question grid */}
