@@ -24,7 +24,7 @@
 .login-button {
   width: 100%;
   padding: 0.65rem;
-  background-color: #007bff;
+  background-color: #86a2AD;
   color: white;
   border: none;
   border-radius: 4px;
@@ -35,7 +35,7 @@
 }
 
 .login-button:hover {
-  background-color: #0056b3;
+  background-color: #0c4658;
 }
 
 .login-button:disabled {
