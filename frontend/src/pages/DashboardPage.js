@@ -17,17 +17,17 @@ const DashboardPage = () => {
         <div className="dashboard-cards">
           <DashboardCard 
             title="Talk with AI Agent" 
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lorem magna, maximus a sagittis id, interdum hendrerit nulla." 
+            description="Engage in interactive conversations with our intelligent AI assistant. Get personalized help, ask questions, and receive instant feedback on your learning progress. Whether you need clarification on concepts or want to practice discussions, our AI agent is available 24/7 to support your educational journey." 
             linkTo="/talk-with-agent" 
           />
           <DashboardCard 
             title="Quiz Exercise" 
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lorem magna, maximus a sagittis id, interdum hendrerit nulla." 
+            description="Test your knowledge with interactive quizzes designed to reinforce your learning. Choose from various question types including multiple choice, true/false, and short answers. Track your scores, identify areas for improvement, and challenge yourself with progressively difficult questions tailored to your skill level." 
             linkTo="/quiz" 
           />
           <DashboardCard 
             title="Track Journey" 
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lorem magna, maximus a sagittis id, interdum hendrerit nulla." 
+            description="Monitor your learning progress with detailed analytics and visual progress tracking. View completed lessons, time spent studying, achievement badges, and performance trends. Set personal goals, celebrate milestones, and stay motivated as you advance through your educational path." 
             linkTo="/journey" 
           />
         </div>
